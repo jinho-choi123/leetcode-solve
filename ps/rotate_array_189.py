@@ -9,16 +9,16 @@ import pytest
 
 
 @pytest.mark.parametrize(
-    "input_nums, k, output_nums",
+    "input_nums, k, golden_nums",
     [([1, 2, 3, 4, 5, 6, 7], 3, [5, 6, 7, 1, 2, 3, 4]), ([-1, -100, 3, 99], 2, [3, 99, -1, -100])],
 )
-def test_rotate_array(input_nums, k, output_nums):
+def test_rotate_array(input_nums, k, golden_nums):
     """Test the solution."""
     nums = input_nums[:]
 
     rotate_array(nums, k)
 
-    assert nums == output_nums
+    assert nums == golden_nums
 
 
 def _partial_reverse(nums: List[int], start_index: int, end_index: int):

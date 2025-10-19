@@ -9,20 +9,20 @@ import pytest
 
 
 @pytest.mark.parametrize(
-    "input_nums, output_nums, output_k",
+    "input_nums, golden_nums, golden_k",
     [
         ([1, 1, 1, 2, 2, 3], [1, 1, 2, 2, 3, 101010], 5),
         ([0, 0, 1, 1, 1, 1, 2, 3, 3], [0, 0, 1, 1, 2, 3, 3, 101010, 101010], 7),
     ],
 )
-def test_remove_duplicates(input_nums, output_nums, output_k):
+def test_remove_duplicates(input_nums, golden_nums, golden_k):
     """Test the solution."""
     nums = input_nums[:]
     k = remove_duplicates(nums)
 
-    assert k == output_k
+    assert k == golden_k
     for index in range(k):
-        assert nums[index] == output_nums[index]
+        assert nums[index] == golden_nums[index]
 
 
 def remove_duplicates(nums: List[int]) -> int:

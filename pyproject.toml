@@ -92,7 +92,7 @@ addopts = [
     "--showlocals",     # Show local variables on failure
     "--color=yes",
 ]
-testpaths = ["tests"] # Directory containing test files
-python_files = ["test_*.py", "*_test.py"] # Test file patterns
+testpaths = ["ps"] # Directory containing test files
+python_files = ["*.py"] # Test file patterns
 python_classes = ["Test*"]
 python_functions = ["test_*"]
