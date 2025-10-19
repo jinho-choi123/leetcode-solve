@@ -1,0 +1,98 @@
+[project]
+name = "ps"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[dependency-groups]
+dev = ["ruff", "pre-commit", "ty", "pytest", "loguru"]
+
+[tool.uv]
+default-groups = ["dev"]
+
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".git",
+    ".env",
+    ".venv",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    "__pycache__",
+    "build",
+    "dist",
+    "hac",
+    "Runtime-Driver",
+    "main.py",
+]
+
+line-length = 119
+indent-width = 4
+target-version = "py310"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.ruff.lint]
+# Enable all rules that match Google Python Style Guide
+select = [
+    "E",   # pycodestyle errors (PEP8)
+    "F",   # pyflakes - Python syntax errors and undefined names
+    "W",   # pycodestyle warnings
+    "I",   # isort - import sorting
+    "N",   # pep8-naming - Google Style Guide naming conventions
+    "D",   # pydocstyle - Google Style docstring conventions
+    "B",   # flake8-bugbear - Additional bug detection
+    "C4",  # flake8-comprehensions - Better list/set/dict comprehensions
+    "DTZ", # flake8-datetimez - Modern datetime practices
+    "T20", # flake8-print - Discourage print statements
+    "RET", # flake8-return - Consistent return statements
+    "SIM", # flake8-simplify - Code simplification suggestions
+    "ERA", # eradicate - Remove commented-out code
+]
+
+ignore = [
+    "E501",   # line too long (we keep 119 as specified)
+    "D203",   # one-blank-line-before-class (conflicts with D211)
+    "D213",   # multi-line-summary-second-line (conflicts with D212)
+    "D104",   # undocumented-public-package
+    "RET504", # return statement is redundant (not necessary)
+    "SIM108", # Use ternary operator instead of if-else block (if else block is more readable)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]                         # Ignore unused imports in __init__ files
+"tests/integration_test/*" = ["D103", "ERA001"]
+"tests/transformers_test/*" = ["D103", "ERA001"]
+"tests/unit_test/*" = ["D103", "ERA001"]
+"**/_C/**" = ["N801"]                            # Ignore name convention of class in _C files
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+
+[tool.ty.environment]
+extra-paths = ["ps"]
+
+[tool.pytest.ini_options]
+log_level = "INFO"
+addopts = [
+    "--durations=0",    # Show durations of each test
+    "--strict-markers", # Warn if unregistered markers are used
+    "--tb=short",       # Short traceback format
+    "-ra",              # Show all test results summary (failures, skips, etc.)
+    "--showlocals",     # Show local variables on failure
+    "--color=yes",
+]
+testpaths = ["tests"] # Directory containing test files
+python_files = ["test_*.py", "*_test.py"] # Test file patterns
+python_classes = ["Test*"]
+python_functions = ["test_*"]
